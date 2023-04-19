@@ -5,7 +5,7 @@ import {useQuery} from "react-query";
 const companiesURL = "https://groep35.webdev.ilabt.imec.be/company"
 
 const Companies = () => {
-    const { data: companyData, isLoading, isError } = useTest(companiesURL);
+    const { data: companyData, isLoading, isError } = useTest(companiesURL, "companies");
     if (isLoading) {
         return <div>Loading...</div>;
     }

@@ -38,9 +38,12 @@ export const fetchResourceData = async (resources) => {
     }
 };
 
-export const useTest = async (URL) => {
-    const response = await axios.get(URL);
-    return useQuery(URL, () => fetchResourceData(response.data))
+export const useTest = (URL, resourceType) => {
+    return useQuery(URL, async () => {
+        const response = await axios.get(URL);
+        console.log(response.data)
+        return fetchResourceData(response.data[resourceType]) // Extract company URLs from raw data
+    });
 }
 
 export default {usePageData, fetchResourceData, useTest}
