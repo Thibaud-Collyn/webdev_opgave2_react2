@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import axios from "axios";
 import {useQuery} from "react-query";
 
-const usePageData = (resourceUrl) => {
+export const usePageData = (resourceUrl) => {
     const fetchResource = useCallback(async () => {
         if (!resourceUrl) {
             return null;
@@ -19,7 +19,7 @@ const usePageData = (resourceUrl) => {
     return useQuery(resourceUrl, fetchResource);
 };
 
-const fetchResourceData = async (resources) => {
+export const fetchResourceData = async (resources) => {
     try {
         const data = await Promise.all(
             resources.map(async (resourceUrl) => {
@@ -31,10 +31,16 @@ const fetchResourceData = async (resources) => {
                 }
             })
         );
+        console.log(data)
         return data;
     } catch (error) {
         console.error('Error fetching resource data:', error);
     }
 };
 
-export default {usePageData, fetchResourceData}
+export const useTest = async (URL) => {
+    const response = await axios.get(URL);
+    return useQuery(URL, () => fetchResourceData(response.data))
+}
+
+export default {usePageData, fetchResourceData, useTest}

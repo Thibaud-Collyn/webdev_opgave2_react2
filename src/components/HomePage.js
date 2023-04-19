@@ -1,12 +1,12 @@
 import React from 'react';
-import useSingleResourceQuery from "./AxiosFunctions";
+import {usePageData} from "./AxiosFunctions";
 import {Link} from "react-router-dom";
 
 
 const ApiURL = 'https://groep35.webdev.ilabt.imec.be/'
 
 const HomePage = () => {
-    const { data: homepgData, isLoading, isError } = useSingleResourceQuery(ApiURL)
+    const { data: homepgData, isLoading, isError } = usePageData(ApiURL)
 
     if (isLoading) {
         return <div>Loading...</div>;
