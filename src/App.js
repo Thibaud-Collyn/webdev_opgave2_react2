@@ -8,6 +8,8 @@ import Employees from "./components/Employees";
 import Jobs from "./components/Jobs";
 import Recruiters from "./components/Recruiters";
 import Reviews from "./components/Reviews";
+import AddCompany from "./components/AddCompany"
+import CompanyDetails from "./components/CompanyDetails"
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="job" element={<Jobs />} />
           <Route path="recruiter" element={<Recruiters />} />
           <Route path="review" element={<Reviews />} />
+          <Route path="add-company" element={<AddCompany />} />
+          <Route path="add-company/:companyUrl" element={<CompanyDetails/>} /> //Figure out how to
       </Routes>
   );
 }

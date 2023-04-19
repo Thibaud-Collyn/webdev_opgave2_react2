@@ -1,10 +1,12 @@
 import React from 'react';
-import {usePageData, fetchResourceData, useTest} from './AxiosFunctions';
-import {useQuery} from "react-query";
+import { useTest } from './AxiosFunctions';
+import { useNavigate } from "react-router-dom";
 
 const companiesURL = "https://groep35.webdev.ilabt.imec.be/company"
 
 const Companies = () => {
+    const navigate = useNavigate()
+
     const { data: companyData, isLoading, isError } = useTest(companiesURL, "companies");
     if (isLoading) {
         return <div>Loading...</div>;
@@ -16,11 +18,19 @@ const Companies = () => {
 
     return(
         <div>
-            <button id='return home'></button>
+            <button id='return home' onClick={() => navigate('/')}>Home</button>
+            <button id='addCompany' onClick={() => navigate('/add-company')}>Add company</button>
             <h1>Companies</h1>
             <ul>
                 {companyData.map(company => (
-                    <li>Name: {company.name}</li>
+                    <li>
+                        <h2>Name: {company.name}</h2>
+                        <p>Industry: {company.industry}</p>
+                        <p>Description: {company.description}</p>
+                        <pre>Size: {company.size}   Score: {company.score}</pre>
+                        <p>TODO: display jobs, employees and applications</p>
+                        <br/>
+                    </li>
                 ))}
             </ul>
         </div>
