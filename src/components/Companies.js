@@ -13,7 +13,8 @@ const Companies = () => {
         mutationFn : deleteResource,
         onSuccess: () => {
             console.log("successfully deleted company");
-            navigate(`/company/${encodeURIComponent(companiesURL)}`);
+            refetch().then(r => r.data)
+            //navigate(`/company/${encodeURIComponent(companiesURL)}`);
         },
         onError: () => {
             alert('An error has occurred while deleting a company');
@@ -28,8 +29,8 @@ const Companies = () => {
         });
     }
 
-    const { data: companyData, isLoading, isError } = useTest(companiesURL, "companies");
-    
+    const { data: companyData, isLoading, isError, refetch } = useTest(companiesURL, "companies");
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
