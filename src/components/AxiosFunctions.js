@@ -46,4 +46,12 @@ export const useTest = (URL, resourceType) => {
     });
 }
 
-export default {usePageData, fetchResourceData, useTest}
+export const postCompany = async ({URL, name, industry, description, size}) => {
+    return axios.post(
+        URL,
+        {size, description, industry, name},
+        {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+    ).then(res => res.data);
+}
+
+export default {usePageData, fetchResourceData, useTest, postCompany}

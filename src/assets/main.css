@@ -34,6 +34,29 @@ a,
     }
 }
 
-.HomeButton {
+.Button {
+    background-color: #2a2929;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+}
 
+.company {
+    border: 2px solid hsla(160, 100%, 37%, 1);
+    border-radius: 10px;
+    padding: 5%;
+    box-sizing: border-box;
+}
+.company-wrapper {
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    min-width: 200px;
+    max-width: 1200px;
+    margin: 1rem;
 }

@@ -15,14 +15,14 @@ function App() {
   return (
       <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="applicant" element={<Applicants />} />
-          <Route path="application" element={<Applications />} />
-          <Route path="company" element={<Companies />} />
-          <Route path="employee" element={<Employees />} />
-          <Route path="job" element={<Jobs />} />
-          <Route path="recruiter" element={<Recruiters />} />
-          <Route path="review" element={<Reviews />} />
-          <Route path="add-company" element={<AddCompany />} />
+          <Route path="applicant/:url" element={<Applicants />} />
+          <Route path="application/:url" element={<Applications />} />
+          <Route path="company/:url" element={<Companies />} />
+          <Route path="employee/:url" element={<Employees />} />
+          <Route path="job/:url" element={<Jobs />} />
+          <Route path="recruiter/:url" element={<Recruiters />} />
+          <Route path="review/:url" element={<Reviews />} />
+          <Route path="add-company/:url" element={<AddCompany />} />
           <Route path="add-company/:companyUrl" element={<CompanyDetails/>} /> //Figure out how to
       </Routes>
   );

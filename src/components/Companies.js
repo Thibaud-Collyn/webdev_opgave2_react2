@@ -18,12 +18,12 @@ const Companies = () => {
 
     return(
         <div>
-            <button id='return home' onClick={() => navigate('/')}>Home</button>
-            <button id='addCompany' onClick={() => navigate('/add-company')}>Add company</button>
+            <button className='Button' id='return home' onClick={() => navigate('/')}>Home</button>
+            <button className='Button' id='addCompany' onClick={() => navigate('/add-company')}>Add company</button>
             <h1>Companies</h1>
             <ul>
                 {companyData.map(company => (
-                    <li>
+                    <li className='company'>
                         <h2>Name: {company.name}</h2>
                         <p>Industry: {company.industry}</p>
                         <p>Description: {company.description}</p>

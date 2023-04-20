@@ -20,13 +20,13 @@ const HomePage = () => {
         <div>
             <h1>Homepage</h1>
             <ul>
-                <li> <Link to='/applicant'>Applicants</Link> </li>
-                <li> <Link to="/application">Applications</Link> </li>
-                <li> <Link to="/company">Companies</Link> </li>
-                <li> <Link to="/employee">Employees</Link> </li>
-                <li> <Link to="/job">Jobs</Link> </li>
-                <li> <Link to="/recruiter">Recruiters</Link> </li>
-                <li> <Link to="/recruiter">Recruiters</Link> </li>
+                <li> <Link to={`/applicant/${encodeURIComponent(homepgData['applicants'])}`}>Applicants</Link> </li>
+                <li> <Link to={`/application/${encodeURIComponent(homepgData['applications'])}`}>Applications</Link> </li>
+                <li> <Link to={`/company/${encodeURIComponent(homepgData['companies'])}`}>Companies</Link> </li>
+                <li> <Link to={`/employee/${encodeURIComponent(homepgData['employees'])}`}>Employees</Link> </li>
+                <li> <Link to={`/job/${encodeURIComponent(homepgData['jobs'])}`}>Jobs</Link> </li>
+                <li> <Link to={`/recruiter/${encodeURIComponent(homepgData['recruiters'])}`}>Recruiters</Link> </li>
+                <li> <Link to={`/review/${encodeURIComponent(homepgData['reviews'])}`}>Reviews</Link> </li>
             </ul>
         </div>
     )
