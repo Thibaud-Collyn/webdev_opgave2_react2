@@ -54,4 +54,8 @@ export const postCompany = async ({URL, name, industry, description, size}) => {
     ).then(res => res.data);
 }
 
-export default {usePageData, fetchResourceData, useTest, postCompany}
+export const deleteResource = async ({URL}) => {
+    return axios.delete(URL).then(res => res.data);
+}
+
+export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource}

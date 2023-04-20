@@ -1,13 +1,35 @@
 import React from 'react';
-import { useTest } from './AxiosFunctions';
-import { useNavigate } from "react-router-dom";
-
-const companiesURL = "https://groep35.webdev.ilabt.imec.be/company"
+import {deleteResource, postCompany, useTest} from './AxiosFunctions';
+import { useNavigate, useParams } from "react-router-dom";
+import {useMutation} from "react-query";
 
 const Companies = () => {
     const navigate = useNavigate()
 
+    const params = useParams();
+    const companiesURL = decodeURIComponent(params.url);
+
+    const createPostMutation = useMutation({
+        mutationFn : deleteResource,
+        onSuccess: () => {
+            console.log("successfully deleted company");
+            navigate(`/company/${encodeURIComponent(companiesURL)}`);
+        },
+        onError: () => {
+            alert('An error has occurred while deleting a company');
+        },
+    });
+
+    const handleDelete = (companyUrl) => {
+        //e.preventDefault()
+        console.log(`attempting to delete company with url: ${companyUrl}`);
+        createPostMutation.mutate({
+            URL: companyUrl,
+        });
+    }
+
     const { data: companyData, isLoading, isError } = useTest(companiesURL, "companies");
+    
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -16,60 +38,37 @@ const Companies = () => {
         return <div>An error has occurred.</div>;
     }
 
+    const gridStyle = {
+        display: 'grid',
+        //gridTemplateColumns: `repeat(${this.columns}, minmax(300px, 1fr))`,
+        gridGap: '1rem',
+        minWidth: '200px',
+        maxWidth: '1200px',
+        margin: '0 auto'
+    };
+
     return(
         <div>
             <button className='Button' id='return home' onClick={() => navigate('/')}>Home</button>
             <button className='Button' id='addCompany' onClick={() => navigate('/add-company')}>Add company</button>
             <h1>Companies</h1>
-            <ul>
+            <div className='company-wrapper' style={gridStyle}>
                 {companyData.map(company => (
-                    <li className='company'>
+                    <div className='company'>
                         <h2>Name: {company.name}</h2>
                         <p>Industry: {company.industry}</p>
                         <p>Description: {company.description}</p>
                         <pre>Size: {company.size}   Score: {company.score}</pre>
                         <p>TODO: display jobs, employees and applications</p>
+                        <button className='Button' onClick={() => handleDelete(company.url)}>Delete</button>
                         <br/>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
 
-// const CompanyDisplay = (companyURLs) => {
-//     //console.log("CompanyDisplay called")
-//     console.log({companyURLs})
-//     if (!companyURLs.length) {
-//         return <div>Currently no companies available</div>
-//     }
-//     //const { data: companyData, isLoading, isError } = fetchResourceData(companyURLs);
-//     const companyData = fetchResourceData(companyURLs);
-//     const useCompanyDataQuery = () => {
-//         return useQuery(['companyData', companyURLs], () => companyData);
-//     };
-//     // console.log("Called in CompanyDisplay:");
-//     // console.log(companyData);
-//     if (isLoading) {
-//         return <div>Loading...</div>;
-//     }
-//
-//     if (isError) {
-//         return <div>An error has occurred.</div>;
-//     }
-//
-//     console.log("companyDataQuery:");
-//     console.log({companyDataQuery});
-//
-//     return(
-//         <div>
-//             <ul>
-//                 {companyDataQuery.map(company => (
-//                     <li>Name: {company.name}</li>
-//                 ))}
-//             </ul>
-//         </div>
-//     )
-// }
+//<button className='Button' onClick={() => handleDelete(company.index)}>Delete</button>
 
 export default Companies

@@ -1,13 +1,13 @@
-import React, {useRef, useState} from 'react';
-import {postCompany, postResource, usePostCompany} from "./AxiosFunctions";
+import React, {useRef} from 'react';
+import {postCompany} from "./AxiosFunctions";
 import {useMutation} from "react-query";
-import {useNavigate} from "react-router-dom";
-
-const postURL = "https://groep35.webdev.ilabt.imec.be/company"
+import {useNavigate, useParams} from "react-router-dom";
 
 const AddCompany = () => {
     //TODO: implement post using axios + back button to companies(with link)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const params = useParams();
+    const postURL = decodeURIComponent(params.url);
 
     const newName = useRef();
     const newIndustry = useRef();
@@ -17,7 +17,7 @@ const AddCompany = () => {
     const createPostMutation = useMutation({
         mutationFn : postCompany,
         onSuccess: () => {
-            navigate('/company')
+            navigate(`/company/${encodeURIComponent(params.url)}`);
         }
     })
 
@@ -35,7 +35,7 @@ const AddCompany = () => {
 
     return(
         <div>
-            <button className='Button' onClick={() => navigate('/company')}>Cancel</button>
+            <button className='Button' onClick={() => navigate(`/company/${encodeURIComponent(params.url)}`)}>Cancel</button>
             <form onSubmit={HandleSubmit}>
                 <h1>Add new Company</h1>
                 <p>Name of new company: <input
