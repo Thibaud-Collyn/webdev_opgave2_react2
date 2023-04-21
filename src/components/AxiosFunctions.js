@@ -86,7 +86,21 @@ export const postCompany = async ({method, URL, name, industry, description, siz
 }
 
 export const postJob = async ({method, URL, deadline, published, salaryMax, salaryMin, description, company, recruiter}) => {
-    console.log(`Trying to add job with company url ${company} and description ${description}`);
+    if (method === "post") {
+        return axios.post(
+            URL,
+            {deadline, published, salaryMax, salaryMin, description, company, recruiter},
+            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+        ).then(res => res.data);
+    } else if (method === "patch") {
+        return axios.patch(
+            URL,
+            {deadline, published, salaryMax, salaryMin, description, company, recruiter},
+            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+        ).then(res => res.data);
+    }
+}
+
 export const postApplicant = async ({method, URL, name, email, resume, skills}) => {
     if (method === "post") {
         return axios.post(
@@ -103,20 +117,6 @@ export const postApplicant = async ({method, URL, name, email, resume, skills}) 
     }
 }
 
-    if (method === "post") {
-        return axios.post(
-            URL,
-            {deadline, published, salaryMax, salaryMin, description, company, recruiter},
-            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
-        ).then(res => res.data);
-    } else if (method === "patch") {
-        return axios.patch(
-            URL,
-            {deadline, published, salaryMax, salaryMin, description, company, recruiter},
-            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
-        ).then(res => res.data);
-    }
-}
 
 export const deleteResource = async ({URL}) => {
     return axios.delete(URL).then(res => res.data);
