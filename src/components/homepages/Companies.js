@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteResource, postCompany, useTest} from '../AxiosFunctions';
+import {deleteResource, useTest} from '../AxiosFunctions';
 import { useNavigate, useParams } from "react-router-dom";
 import {useMutation} from "react-query";
 
