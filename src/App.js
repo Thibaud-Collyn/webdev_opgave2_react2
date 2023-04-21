@@ -12,12 +12,14 @@ import AddCompany from "./components/add_pages/AddCompany";
 import CompanyDetails from "./components/detail_pages/CompanyDetails";
 import EditCompany from "./components/edit_pages/EditCompany";
 import AddJob from "./components/add_pages/AddJob";
+import ApplicantDetails from "./components/detail_pages/ApplicantDetails";
 
 function App() {
   return (
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="applicant/:url" element={<Applicants />} />
+          <Route path="detail-applicant/:url" element={<ApplicantDetails />} />
 
           <Route path="application/:url" element={<Applications />} />
 
