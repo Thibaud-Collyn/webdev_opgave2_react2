@@ -1,10 +1,9 @@
 import React, {useRef} from 'react';
-import {postCompany} from "./AxiosFunctions";
+import {postCompany} from "../AxiosFunctions";
 import {useMutation} from "react-query";
 import {useNavigate, useParams} from "react-router-dom";
 
 const AddCompany = () => {
-    //TODO: implement post using axios + back button to companies(with link)
     const navigate = useNavigate();
     const params = useParams();
     const postURL = decodeURIComponent(params.url);
@@ -25,6 +24,7 @@ const AddCompany = () => {
         e.preventDefault()
         console.log(`attempted to add: ${newName.current.value}`);
         createPostMutation.mutate({
+            method: "post",
             URL: postURL,
             name: newName.current.value,
             industry: newIndustry.current.value,

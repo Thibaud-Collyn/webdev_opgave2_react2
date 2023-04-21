@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteResource, postCompany, useTest} from './AxiosFunctions';
+import {deleteResource, postCompany, useTest} from '../AxiosFunctions';
 import { useNavigate, useParams } from "react-router-dom";
 import {useMutation} from "react-query";
 
@@ -14,7 +14,6 @@ const Companies = () => {
         onSuccess: () => {
             console.log("successfully deleted company");
             refetch().then(r => r.data)
-            //navigate(`/company/${encodeURIComponent(companiesURL)}`);
         },
         onError: () => {
             alert('An error has occurred while deleting a company');
@@ -51,7 +50,7 @@ const Companies = () => {
     return(
         <div>
             <button className='Button' id='return home' onClick={() => navigate('/')}>Home</button>
-            <button className='Button' id='addCompany' onClick={() => navigate('/add-company')}>Add company</button>
+            <button className='Button' id='addCompany' onClick={() => navigate(`/add-company/${encodeURIComponent(params.url)}`)}>Add company</button>
             <h1>Companies</h1>
             <div className='company-wrapper' style={gridStyle}>
                 {companyData.map(company => (
@@ -62,6 +61,8 @@ const Companies = () => {
                         <pre>Size: {company.size}   Score: {company.score}</pre>
                         <p>TODO: display jobs, employees and applications</p>
                         <button className='Button' onClick={() => handleDelete(company.url)}>Delete</button>
+                        <button className='Button' onClick={() => navigate(`/edit-company/${encodeURIComponent(company.url)}`)}>Edit</button>
+                        <button className='Button' onClick={() => navigate(`/detail-company/${encodeURIComponent(company.url)}`)}>Details</button>
                         <br/>
                     </div>
                 ))}
