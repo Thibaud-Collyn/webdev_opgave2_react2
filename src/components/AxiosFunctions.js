@@ -62,6 +62,22 @@ export const postCompany = async ({method, URL, name, industry, description, siz
     }
 }
 
+export const postJob = async ({method, URL, deadline, published, salaryMax, salaryMin, description, company, reqruiter}) => {
+    if (method === "post") {
+        return axios.post(
+            URL,
+            {deadline, published, salaryMax, salaryMin, description, company, reqruiter},
+            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+        ).then(res => res.data);
+    } else if (method === "patch") {
+        return axios.patch(
+            URL,
+            {deadline, published, salaryMax, salaryMin, description, company, reqruiter},
+            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+        ).then(res => res.data);
+    }
+}
+
 export const deleteResource = async ({URL}) => {
     return axios.delete(URL).then(res => res.data);
 }

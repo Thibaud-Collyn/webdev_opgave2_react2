@@ -1,6 +1,6 @@
 import React from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {deleteResource, fetchResourceData, usePageData, useTest} from "../AxiosFunctions";
+import {deleteResource, useTest} from "../AxiosFunctions";
 import formatDate from "../../FormatDate";
 import {useMutation} from "react-query";
 
@@ -51,6 +51,7 @@ const Jobs = () => {
     return (
         <div>
             <button className='Button' id='home' onClick={() => navigate('/')}>Home</button>
+            <button className='Button' id='addHome' onClick={() => navigate(`/add-job/${encodeURIComponent(jobsURL)}`)}>Add job</button>
 
             <h1>Jobs</h1>
             <div className='company-wrapper' style={gridStyle}>
