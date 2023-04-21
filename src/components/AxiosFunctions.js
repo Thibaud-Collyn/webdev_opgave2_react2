@@ -2,6 +2,8 @@ import React, {useCallback} from 'react';
 import axios from "axios";
 import {useQuery} from "react-query";
 
+const ApiURL = 'https://groep35.webdev.ilabt.imec.be'
+
 export const usePageData = (resourceUrl) => {
     const fetchResource = useCallback(async () => {
         if (!resourceUrl) {
@@ -18,6 +20,11 @@ export const usePageData = (resourceUrl) => {
 
     return useQuery(resourceUrl, fetchResource);
 };
+
+export const fetchSingleResource = async (resourceUrl) => {
+    const response = await axios.get(resourceUrl);
+    return response.data;
+}
 
 export const fetchResourceData = async (resources) => {
     try {
@@ -38,10 +45,26 @@ export const fetchResourceData = async (resources) => {
     }
 };
 
+export const fetchSingleLink = async (resource) => {
+    const response = await axios.get(ApiURL).then((response) => response.data[resource]);
+    return response;
+}
+
+export const fetchResources = async (resourceType) => {
+    return fetchSingleLink(resourceType).then(async (value) => {
+        const response = await axios.get(value);
+        return fetchResourceData(response.data[resourceType]);
+    });
+
+};
+
+export const useResourceQuery = (resourceTypeUrl, resourceType) => {
+    return useQuery([...[resourceTypeUrl, resourceType]], () => fetchResources(resourceType));
+};
+
 export const useTest = (URL, resourceType) => {
     return useQuery(URL, async () => {
         const response = await axios.get(URL);
-        console.log(response.data)
         return fetchResourceData(response.data[resourceType]) // Extract company URLs from raw data
     });
 }
@@ -62,6 +85,8 @@ export const postCompany = async ({method, URL, name, industry, description, siz
     }
 }
 
+export const postJob = async ({method, URL, deadline, published, salaryMax, salaryMin, description, company, recruiter}) => {
+    console.log(`Trying to add job with company url ${company} and description ${description}`);
 export const postApplicant = async ({method, URL, name, email, resume, skills}) => {
     if (method === "post") {
         return axios.post(
@@ -78,17 +103,16 @@ export const postApplicant = async ({method, URL, name, email, resume, skills}) 
     }
 }
 
-export const postJob = async ({method, URL, deadline, published, salaryMax, salaryMin, description, company, reqruiter}) => {
     if (method === "post") {
         return axios.post(
             URL,
-            {deadline, published, salaryMax, salaryMin, description, company, reqruiter},
+            {deadline, published, salaryMax, salaryMin, description, company, recruiter},
             {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
         ).then(res => res.data);
     } else if (method === "patch") {
         return axios.patch(
             URL,
-            {deadline, published, salaryMax, salaryMin, description, company, reqruiter},
+            {deadline, published, salaryMax, salaryMin, description, company, recruiter},
             {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
         ).then(res => res.data);
     }
@@ -98,4 +122,4 @@ export const deleteResource = async ({URL}) => {
     return axios.delete(URL).then(res => res.data);
 }
 
-export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource,postApplicant}
+export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource, fetchResources, useResourceQuery, fetchSingleResource, postJob}
