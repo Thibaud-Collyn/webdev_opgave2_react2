@@ -49,14 +49,16 @@ const Recruiters = () => {
     return (
         <div>
             <button className='Button' id='return home' onClick={() => navigate('/')}>Home</button>
+            <button className='Button' id='addRecruiter' onClick={() => navigate(`/add-recruiter/${encodeURIComponent(recruitersURL)}`)}>Add recruiter</button>
             <h1>Recruiters</h1>
             <div className='company-wrapper' style={gridStyle}>
-                {reqruiterData.map(reqruiter => (
+                {reqruiterData.map(recruiter => (
                     <div className='company'>
-                        <h2>Name: {reqruiter.name}</h2>
-                        <p>E-mail: {reqruiter.email}</p>
-                        <p> <Link to={`/detail-company/${encodeURIComponent(reqruiter.company)}`}>Employing company</Link> </p>
-                        <button className='Button' onClick={() => handleDelete(reqruiter.url)}>Delete</button>
+                        <h2>Name: {recruiter.name}</h2>
+                        <p>E-mail: {recruiter.email}</p>
+                        <p> <Link to={`/detail-company/${encodeURIComponent(recruiter.company)}`}>Employing company</Link> </p>
+                        <button className='Button' onClick={() => handleDelete(recruiter.url)}>Delete</button>
+                        <button className='Button' onClick={() => navigate(`/edit-recruiter/${encodeURIComponent(recruiter.url)}`)}>Edit</button>
                     </div>
                 ))}
             </div>

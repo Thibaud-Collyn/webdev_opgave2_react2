@@ -13,6 +13,10 @@ import CompanyDetails from "./components/detail_pages/CompanyDetails";
 import EditCompany from "./components/edit_pages/EditCompany";
 import AddJob from "./components/add_pages/AddJob";
 import ApplicantDetails from "./components/detail_pages/ApplicantDetails";
+import AddRecruiter from "./components/add_pages/AddRecruiter";
+import EditRecruiter from "./components/edit_pages/EditRecruiter";
+import JobDetails from "./components/detail_pages/JobDetails";
+import ApplicationDetails from "./components/detail_pages/ApplicationDetails";
 
 function App() {
   return (
@@ -22,6 +26,7 @@ function App() {
           <Route path="detail-applicant/:url" element={<ApplicantDetails />} />
 
           <Route path="application/:url" element={<Applications />} />
+              <Route path={"detail-application/:url"} element={<ApplicationDetails />} />
 
           <Route path="company/:url" element={<Companies />} />
           <Route path="add-company/:url" element={<AddCompany />} />
@@ -32,8 +37,11 @@ function App() {
 
           <Route path="job/:url" element={<Jobs />} />
           <Route path="add-job/:url" element={<AddJob />} />
+          <Route path="detail-job/:url" element={<JobDetails />} />
 
           <Route path="recruiter/:url" element={<Recruiters />} />
+          <Route path="add-recruiter/:url" element={<AddRecruiter />} />
+          <Route path="edit-recruiter/:url" element={<EditRecruiter />} />
 
           <Route path="review/:url" element={<Reviews />} />
 

@@ -117,9 +117,25 @@ export const postApplicant = async ({method, URL, name, email, resume, skills}) 
     }
 }
 
+export const postRecruiter = async ({method, URL, name, email, company}) => {
+    if (method === "post") {
+        return axios.post(
+            URL,
+            {name:name, email:email, company:company},
+            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+        ).then(res => res.data);
+    } else if (method === "patch") {
+        return axios.patch(
+            URL,
+            {name:name, email:email,company:company },
+            {headers: { 'Content-Type': 'application/vnd.jobs+json' }}
+        ).then(res => res.data);
+    }
+}
+
 
 export const deleteResource = async ({URL}) => {
     return axios.delete(URL).then(res => res.data);
 }
 
-export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource, fetchResources, useResourceQuery, fetchSingleResource, postJob}
+export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource, fetchResources, useResourceQuery, fetchSingleResource, postJob,postRecruiter}

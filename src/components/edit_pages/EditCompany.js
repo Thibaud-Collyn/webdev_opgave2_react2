@@ -38,6 +38,15 @@ const EditCompany = () => {
         });
     }
 
+    useEffect(() => {
+        if (companyData) {
+            setName(companyData.name);
+            setDescription(companyData.description);
+            setIndustry(companyData.industry);
+            setSize(companyData.size);
+        }
+    }, [companyData]);
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
