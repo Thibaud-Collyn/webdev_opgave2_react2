@@ -17,6 +17,7 @@ import AddRecruiter from "./components/add_pages/AddRecruiter";
 import EditRecruiter from "./components/edit_pages/EditRecruiter";
 import JobDetails from "./components/detail_pages/JobDetails";
 import ApplicationDetails from "./components/detail_pages/ApplicationDetails";
+import AddApplicant from "./components/add_pages/AddApplicant";
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="applicant/:url" element={<Applicants />} />
           <Route path="detail-applicant/:url" element={<ApplicantDetails />} />
+          <Route path="add-applicant/:url" element={<AddApplicant />} />
 
           <Route path="application/:url" element={<Applications />} />
-              <Route path={"detail-application/:url"} element={<ApplicationDetails />} />
+          <Route path={"detail-application/:url"} element={<ApplicationDetails />} />
 
           <Route path="company/:url" element={<Companies />} />
           <Route path="add-company/:url" element={<AddCompany />} />

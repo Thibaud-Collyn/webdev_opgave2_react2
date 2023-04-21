@@ -138,4 +138,4 @@ export const deleteResource = async ({URL}) => {
     return axios.delete(URL).then(res => res.data);
 }
 
-export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource, fetchResources, useResourceQuery, fetchSingleResource, postJob,postRecruiter}
+export default {usePageData, fetchResourceData, useTest, postCompany, deleteResource, fetchResources, useResourceQuery, fetchSingleResource, postJob,postRecruiter, postApplicant}

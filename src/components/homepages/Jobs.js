@@ -22,7 +22,6 @@ const Jobs = () => {
     });
 
     const handleDelete = (jobUrl) => {
-        //e.preventDefault()
         console.log(`attempting to delete job with url: ${jobUrl}`);
         createPostMutation.mutate({
             URL: jobUrl,
