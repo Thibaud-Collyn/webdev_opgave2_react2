@@ -13,7 +13,7 @@ const Jobs = () => {
     const createPostMutation = useMutation({
         mutationFn : deleteResource,
         onSuccess: () => {
-            console.log("successfully deleted company");
+            console.log("successfully deleted job");
             refetch().then(r => r.data)
         },
         onError: () => {
